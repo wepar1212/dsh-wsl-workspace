@@ -5,13 +5,19 @@ import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
 import type {} from 'zod'
 import type { WslDirectoryListing, WslDistributionSnapshot } from './types.ts'
 import { listWslDirectory, listWslDistributions } from './wsl.ts'
+import { registerWslCommandBridge } from './wsl-command.ts'
+import { registerWslTerminal } from './wsl-terminal.ts'
 
 export type * from './types.ts'
 
 /** Remote-only gateway used by the WSL workspace browser. */
 export class WslWorkspaceGateway extends TypertRemoteService {
+  static inject = ['tools', 'systemPrompt', 'subprocess', 'agents']
+
   constructor(ctx: Context) {
     super(ctx, 'wslWorkspace')
+    registerWslCommandBridge(ctx)
+    registerWslTerminal(ctx)
   }
 
   /**

@@ -11,6 +11,11 @@ const WSL_COMMAND_TIMEOUT_MS = 10_000
 const WSL_COMMAND_OUTPUT_LIMIT = 1024 * 1024
 const DIRECTORY_LIMIT = 1_000
 
+export interface WslWorkspaceTarget {
+  readonly distribution: string
+  readonly linuxPath: string
+}
+
 interface CommandResult {
   readonly exitCode: number | null
   readonly stdout: Buffer
@@ -68,6 +73,19 @@ export function wslUncPath(server: 'wsl.localhost' | 'wsl$', distribution: strin
   const normalized = normalizeLinuxPath(linuxPath)
   const suffix = normalized === '/' ? '' : `\\${normalized.slice(1).split('/').join('\\')}`
   return `\\\\${server}\\${name}${suffix}`
+}
+
+/** Parse a Windows WSL UNC workspace path back into its Linux target. */
+export function parseWslUncPath(value: string): WslWorkspaceTarget | undefined {
+  const match = /^\\\\(?:wsl\.localhost|wsl\$)\\([^\\]+)(?:\\(.*))?$/iu.exec(value.trim())
+  if (match === null || match[1] === undefined) return undefined
+  const linuxPath = match[2] === undefined || match[2] === ''
+    ? '/'
+    : `/${match[2].split('\\').join('/')}`
+  return {
+    distribution: validateDistributionName(match[1]),
+    linuxPath: normalizeLinuxPath(linuxPath),
+  }
 }
 
 function runWsl(args: readonly string[]): Promise<CommandResult> {

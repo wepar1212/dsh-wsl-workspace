@@ -1,7 +1,7 @@
 {
   "name": "dsh-wsl-workspace",
-  "version": "0.1.0",
-  "description": "Select WSL directories as DeepSeek Harness workspaces from the Web UI.",
+  "version": "0.2.0",
+  "description": "Remote WSL workspaces, resource browsing, and Ubuntu command routing for DeepSeek Harness.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wepar1212/dsh-wsl-workspace.git"
@@ -95,12 +95,17 @@
     "@deepseek-ai/dsh-client-ui-slots": "^0.1.0-rc.5",
     "@deepseek-ai/dsh-client-ui-workspace": "^0.1.0-rc.5",
     "@deepseek-ai/dsh-invariants": "^0.1.0-rc.5",
+    "@deepseek-ai/dsh-agent": "^0.1.0-rc.5",
+    "@deepseek-ai/dsh-subprocess": "^0.1.0-rc.5",
+    "@deepseek-ai/dsh-system-prompt": "^0.1.0-rc.5",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.5",
     "@deepseek-ai/dsh-typert-protocol": "^0.1.0-rc.5",
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
     "@deepseek-ai/dsh-api-remotes": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-agent": "0.1.0-rc.6",
     "@deepseek-ai/dsh-client-locale": "0.1.0-rc.6",
     "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.6",
     "@deepseek-ai/dsh-client-ui-primitives": "0.1.0-rc.6",
@@ -109,6 +114,9 @@
     "@deepseek-ai/dsh-client-ui-workspace": "0.1.0-rc.6",
     "@deepseek-ai/dsh-client-web-react": "0.1.0-rc.6",
     "@deepseek-ai/dsh-invariants": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-subprocess": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-system-prompt": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "0.1.0-rc.6",
     "@deepseek-ai/dsh-typert-protocol": "0.1.0-rc.6",
     "@testing-library/react": "^16.1.0",
     "@types/node": "^24.0.0",

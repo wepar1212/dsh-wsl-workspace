@@ -5,6 +5,7 @@ import type { WslDirectoryListing, WslDistributionSnapshot } from './types.ts';
 export type * from './types.ts';
 /** Remote-only gateway used by the WSL workspace browser. */
 export declare class WslWorkspaceGateway extends TypertRemoteService {
+    static inject: string[];
     constructor(ctx: Context);
     /**
      * Enumerate distributions installed for the Windows account running DSH.

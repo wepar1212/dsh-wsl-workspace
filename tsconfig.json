@@ -24,6 +24,8 @@
     "src/invariant.ts",
     "src/types.ts",
     "src/wsl.ts",
+    "src/wsl-command.ts",
+    "src/wsl-terminal.ts",
     "src/typert.host.ts",
     "src/typert.remote-client.ts"
   ]

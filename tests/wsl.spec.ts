@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   decodeWslOutput, normalizeLinuxPath, parseDistributionList,
-  validateDistributionName, wslUncPath,
+  parseWslUncPath, validateDistributionName, wslUncPath,
 } from '../src/wsl.ts'
 
 describe('WSL workspace path helpers', () => {
@@ -31,5 +31,12 @@ describe('WSL workspace path helpers', () => {
     expect(wslUncPath('wsl.localhost', 'Ubuntu', '/home/user/project'))
       .toBe('\\\\wsl.localhost\\Ubuntu\\home\\user\\project')
     expect(wslUncPath('wsl$', 'Ubuntu', '/')).toBe('\\\\wsl$\\Ubuntu')
+  })
+
+  it('round-trips WSL UNC workspaces into a distribution and Linux cwd', () => {
+    expect(parseWslUncPath('\\\\wsl.localhost\\Ubuntu\\home\\user\\project'))
+      .toEqual({ distribution: 'Ubuntu', linuxPath: '/home/user/project' })
+    expect(parseWslUncPath('\\\\wsl$\\Debian')).toEqual({ distribution: 'Debian', linuxPath: '/' })
+    expect(parseWslUncPath('C:\\work\\project')).toBeUndefined()
   })
 })
