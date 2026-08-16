@@ -30,49 +30,21 @@ An independent out-of-tree bundle for DeepSeek Harness. It adds a manual WSL swi
 - No VS Code Server is required inside WSL. The distro only needs `bash`; project toolchains such as Rust, Node.js, or Python are installed as needed.
 - No DSH distribution file needs to be edited.
 
-## 本地安装 / Local installation
+## 安装 / Install
 
-先构建插件：
-
-```powershell
-$PluginSource = 'C:\path\to\dsh-wsl-workspace'
-pnpm --dir $PluginSource install
-pnpm --dir $PluginSource build
-```
-
-然后通过 Web profile 一句话安装并挂载：
+进入 DSH 源码根目录，执行下面这一条命令即可安装并挂载插件（无需下载插件源码、安装依赖或手动构建）：
 
 ```powershell
-$DshSource = 'C:\path\to\deepseek-harness'
-pnpm --dir $DshSource dsh plugin --profile web add "link:$PluginSource"
-```
-
-发布版可直接从 GitHub 一句话安装（需要 DSH 源码已安装）：
-
-```powershell
-cd C:\path\to\deepseek-harness
 pnpm dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
 ```
-
-仓库已包含预构建的 `lib/`，安装者无需先下载插件源码或单独构建。
 
 重启 DSH 后，在侧边栏底部点击 WSL 按钮，手动打开开关，选择发行版和目录。
 
-Build the plugin first, then install the local link with the profile command above. Restart DSH and use the WSL action at the bottom of the sidebar.
-
-For the published build, install it in one line from GitHub:
-
-```powershell
-cd C:\path\to\deepseek-harness
-pnpm dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
-```
-
-The repository includes the prebuilt `lib/` output, so users do not need a separate source checkout or build step.
+From the DSH source root, run the command above to install and mount the plugin. No plugin checkout, dependency install, or manual build is required. Restart DSH, click the WSL action at the bottom of the sidebar, enable it, and choose a distribution and directory.
 
 ## 卸载 / Uninstall
 
 ```powershell
-cd C:\path\to\deepseek-harness
 pnpm dsh plugin --profile web remove dsh-wsl-workspace
 ```
 
