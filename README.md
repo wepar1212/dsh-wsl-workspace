@@ -6,6 +6,8 @@ An independent out-of-tree bundle for DeepSeek Harness. It adds a manual WSL swi
 
 ![WSL 工作区入口 / WSL workspace entry](./assets/wsl-workspace-entry.png)
 
+![WSL 目录选择 / WSL directory picker](./assets/wsl-workspace-picker.png)
+
 ## 功能 / Features
 
 - 开关默认关闭；只有用户手动启用后才访问 WSL。
