@@ -1,0 +1,6 @@
+# dsh-wsl-workspace bundle layer. The profile CLI installs and mounts this
+# single dual-entry package; its Host half owns WSL access and its browser
+# half contributes the manual workspace picker.
+- insert:
+    - id: wsl-workspace
+      name: dsh-wsl-workspace

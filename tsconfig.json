@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2024"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": false,
+    "composite": true,
+    "tsBuildInfoFile": "lib/.tsbuildinfo-host",
+    "types": ["node"]
+  },
+  "include": [
+    "src/index.ts",
+    "src/invariant.ts",
+    "src/types.ts",
+    "src/wsl.ts",
+    "src/typert.host.ts",
+    "src/typert.remote-client.ts"
+  ]
+}
