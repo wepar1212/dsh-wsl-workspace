@@ -52,6 +52,7 @@
     "lib/types/typert.remote-client.d.ts",
     "cordis.patch.yml",
     "README.md",
+    "assets",
     "LICENSE"
   ],
   "dsh": {

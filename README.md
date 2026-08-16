@@ -35,20 +35,23 @@ An independent out-of-tree bundle for DeepSeek Harness. It adds a manual WSL swi
 先构建插件：
 
 ```powershell
-pnpm --dir D:\Desktop\dsh-plugins\wsl-workspace install
-pnpm --dir D:\Desktop\dsh-plugins\wsl-workspace build
+$PluginSource = 'C:\path\to\dsh-wsl-workspace'
+pnpm --dir $PluginSource install
+pnpm --dir $PluginSource build
 ```
 
 然后通过 Web profile 一句话安装并挂载：
 
 ```powershell
-pnpm --dir D:\Desktop\deepseek-harness dsh plugin --profile web add link:D:/Desktop/dsh-plugins/wsl-workspace
+$DshSource = 'C:\path\to\deepseek-harness'
+pnpm --dir $DshSource dsh plugin --profile web add "link:$PluginSource"
 ```
 
 发布版可直接从 GitHub 一句话安装（需要 DSH 源码已安装）：
 
 ```powershell
-pnpm --dir D:\Desktop\deepseek-harness dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
+cd C:\path\to\deepseek-harness
+pnpm dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
 ```
 
 仓库已包含预构建的 `lib/`，安装者无需先下载插件源码或单独构建。
@@ -60,7 +63,8 @@ Build the plugin first, then install the local link with the profile command abo
 For the published build, install it in one line from GitHub:
 
 ```powershell
-pnpm --dir D:\Desktop\deepseek-harness dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
+cd C:\path\to\deepseek-harness
+pnpm dsh plugin --profile web add github:wepar1212/dsh-wsl-workspace
 ```
 
 The repository includes the prebuilt `lib/` output, so users do not need a separate source checkout or build step.
@@ -68,7 +72,8 @@ The repository includes the prebuilt `lib/` output, so users do not need a separ
 ## 卸载 / Uninstall
 
 ```powershell
-pnpm --dir D:\Desktop\deepseek-harness dsh plugin --profile web remove dsh-wsl-workspace
+cd C:\path\to\deepseek-harness
+pnpm dsh plugin --profile web remove dsh-wsl-workspace
 ```
 
 ## 开发 / Development

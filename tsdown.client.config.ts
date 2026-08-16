@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import { basename, dirname, resolve as resolvePath } from 'node:path'
+import { basename, dirname, relative, resolve as resolvePath, sep } from 'node:path'
 import type { UserConfig } from 'tsdown'
 import { transform } from 'lightningcss'
 
@@ -21,16 +21,22 @@ const CLIENT_EXTERNALS = [
 ]
 
 function cssModulesPlugin() {
+  const virtualFiles = new Map<string, string>()
+
   return {
     name: 'dsh-css-modules-inline',
     resolveId(source: string, importer: string | undefined) {
       if (!source.endsWith('.module.css')) return null
       const file = importer === undefined ? source : resolvePath(dirname(importer), source)
-      return CSS_VIRTUAL_PREFIX + file + CSS_VIRTUAL_SUFFIX
+      const relativeFile = relative(process.cwd(), file).split(sep).join('/')
+      const virtualId = CSS_VIRTUAL_PREFIX + relativeFile + CSS_VIRTUAL_SUFFIX
+      virtualFiles.set(virtualId, file)
+      return virtualId
     },
     async load(virtualId: string) {
       if (!virtualId.startsWith(CSS_VIRTUAL_PREFIX)) return null
-      const file = virtualId.slice(CSS_VIRTUAL_PREFIX.length, -CSS_VIRTUAL_SUFFIX.length)
+      const file = virtualFiles.get(virtualId)
+      if (file === undefined) return null
       this.addWatchFile(file)
       const source = await readFile(file)
       const { code, exports: cssExports } = transform({
